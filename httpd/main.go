@@ -1,17 +1,25 @@
 package main
 
 import (
-	"fmt"
+	"todoList/httpd/handlers"
 	"todoList/platform"
+
+	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	// r := gin.Default()
+	r := gin.Default()
 
-	// r.GET("/", handlers.Get_all_todo())
+	// I will modify here later on to add the real DB!!
+	db := platform.New()
 
-	// r.Run()
+	//r.GET("/", handlers.Get_one_todo(db))
+	r.GET("/", handlers.Get_all_todo(db))
+	r.POST("/post", handlers.Post_todo(db))
+	//r.PUT("/", handlers.Put_todo())	
+	//r.DELETE("/", handlers.Delete_todo())
+	
 
-	todos := platform.New()
-	fmt.Println(todos)
+	r.Run()
+
 }

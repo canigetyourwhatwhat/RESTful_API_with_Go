@@ -11,18 +11,20 @@ type ItemList struct {
 }
 
 func New() *ItemList {
-	return &ItemList{}
+	return &ItemList{
+		Items: []Item{},
+	}
 }
 
-func (l *ItemList) add(item Item){
+func (l *ItemList) Add(item Item){
 	l.Items = append(l.Items, item)
 }
 
-func (l *ItemList) getAll() []Item {
+func (l *ItemList) GetAll() []Item {
 	return l.Items
 }
 
-func (l *ItemList) getOneItem(target string) Item {
+func (l *ItemList) GetOneItem(target string) Item {
 	for _, value := range l.Items{
 		if value.Title == target{
 			return value
@@ -31,6 +33,6 @@ func (l *ItemList) getOneItem(target string) Item {
 	return Item{}
 }
 
-func (l *ItemList) removeItem(target string) {
+func (l *ItemList) RemoveItem(target string) {
 	
 }

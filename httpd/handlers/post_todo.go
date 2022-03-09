@@ -7,8 +7,8 @@ import (
 )
 
 type itemRequest struct {
-	Title string `json:"title"`
-	Detail string `json:"detail"`
+	ID string `json:"id"`
+	Title string `json:"title"`	
 	Done bool `json:"done"`
 }
 
@@ -18,20 +18,13 @@ func Post_todo (itemList *platform.ItemList) gin.HandlerFunc{
 		c.Bind(&requestBody)
 
 		item := platform.Item{
-			Title: requestBody.Title,
-			Detail: requestBody.Detail,
+			ID: requestBody.ID,
+			Title: requestBody.Title,			
 			Done: requestBody.Done,
 		}
 
-
-
 		itemList.Add(item)
-		//itemList.Items = append(itemList.Items, requestBody)
 
-		c.JSON(200, gin.H{
-			"Title": requestBody.Title,
-			"Detail": requestBody.Detail,
-			"Done": requestBody.Done,
-		})
+		c.JSON(200, item)
 	}
 }

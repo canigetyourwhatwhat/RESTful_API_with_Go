@@ -1,8 +1,12 @@
 package platform
 
+import (
+	"errors"
+)
+
 type Item struct {
-	Title string `json:"title"`
-	Detail string `json:"detail"`
+	ID string `json:"id"`
+	Title string `json:"title"`	
 	Done bool `json:"done"`
 }
 
@@ -24,13 +28,13 @@ func (l *ItemList) GetAll() []Item {
 	return l.Items
 }
 
-func (l *ItemList) GetOneItem(target string) Item {
-	for _, value := range l.Items{
-		if value.Title == target{
-			return value
+func (l *ItemList) GetOneItem(target string) (*Item, error) {
+	for index, value := range l.Items{
+		if value.ID == target{
+			return &l.Items[index], nil
 		}
 	}
-	return Item{}
+	return nil, errors.New("couldn't find the item'")
 }
 
 func (l *ItemList) RemoveItem(target string) {
